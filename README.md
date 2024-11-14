@@ -28,7 +28,7 @@ A mobile application that allows users to register, log in, and access recording
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Tsageon/generic-recorder.git
+   git clone https://github.com/Tsageon/NativeRecorderV2.git
 
 2. install the dependecies:
    ```bash

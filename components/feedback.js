@@ -1,28 +1,37 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import Mailer from 'react-native-mail';
+import * as MailComposer from 'expo-mail-composer';
 
 const FeedbackScreen = () => {
   const [feedback, setFeedback] = useState('');
 
   const sendFeedbackEmail = (feedback) => {
-    Mailer.mail({
+    if (!feedback) {
+      Alert.alert('Please provide feedback before submitting.');
+      return;
+    }
+  
+    MailComposer.composeAsync({
       subject: 'App Feedback',
       recipients: ['sagaetshepo@gmail.com'],
       body: feedback,
-      isHTML: false,
-    }, (error, event) => {
-      if (error) {
+    })
+      .then((result) => {
+        if (result.status === 'sent') {
+          console.log('Mail sent:', result);
+          Alert.alert('Feedback sent successfully!');
+        } else {
+          console.error('Mail failed to send:', result);
+          Alert.alert('Failed to send feedback. Please try again.');
+        }
+      })
+      .catch((error) => {
         console.error('Mail error:', error);
-        Alert.alert('Failed to send feedback. Please try again.');
-      } else {
-        console.log('Mail sent:', event);
-        Alert.alert('Feedback sent successfully!');
-        setFeedback(''); 
-      }
-    });
+        Alert.alert('An error occurred while sending feedback. Please try again.');
+      });
   };
-
+  
+  
   const handleSubmit = () => {
     if (!feedback) {
       Alert.alert('Please provide feedback before submitting.');
