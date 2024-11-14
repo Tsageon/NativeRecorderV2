@@ -22,7 +22,7 @@ A mobile application that allows users to register, log in, and access recording
   - **Registration**: A form to register a new user.
   - **Login**: A form to log in an existing user.
   - **Recordings**: Displays the recordings once the user logs in.
-  - **Feedback**: Allows users to submit feedback.
+  - **Feedback**: Allows users to submit feedback via email.
 
 ## Installation
 
